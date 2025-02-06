@@ -1,0 +1,60 @@
+.outside-line {
+    display: flex;
+    flex: 6;
+    flex-direction: row;
+}
+.home-square {
+    flex: 6;
+}
+.centered-column {
+    display: grid;
+    flex: 3;
+    grid-template-columns: repeat(3, 1fr);
+    flex-direction: column;
+}
+.centered-area {
+    display: flex;
+    flex: 3;
+    flex-direction: row;
+}
+.centered-line {
+    display: grid;
+    flex: 6;
+    grid-template-columns: repeat(6, 1fr);
+    flex-direction: row;
+}
+.finish-area {
+    position: relative;
+    display: grid;
+    flex: 3;
+    grid-template-columns: repeat(3, 1fr);
+    flex-direction: row;
+}
+.triangle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+.green-triangle {
+    clip-path: polygon(0 0, 100% 0, 50% 50%);
+    background: var(--green-light);
+}
+.purple-triangle {
+    clip-path: polygon(0 0, 50% 50%, 0 100%);
+    background: var(--purple-light);
+}
+.blue-triangle {
+    clip-path: polygon(100% 0, 100% 100%, 50% 50%);
+    background: var(--blue-light);
+}
+.orange-triangle {
+    clip-path: polygon(50% 50%, 100% 100%, 0 100%);
+    background: var(--orange-light);
+}
+.tile {
+    flex: 1;
+    aspect-ratio: 1;
+    border: 1px solid #808080;
+}

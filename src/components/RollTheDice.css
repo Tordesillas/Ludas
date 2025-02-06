@@ -1,0 +1,38 @@
+.roll-the-dice {
+    z-index: 5;
+    position: fixed;
+    left: auto;
+    right: auto;
+    bottom: 0;
+    display: flex;
+    height: 4.5rem;
+    width: 7.5rem;
+    justify-content: center;
+    align-items: center;
+    border-top-right-radius: 2rem;
+    border-top-left-radius: 2rem;
+    box-shadow: 0 -3px 10px 0 #00000080;
+    transition: opacity 200ms ease;
+}
+.dice {
+    z-index: 7;
+    position: fixed;
+    left: 30%;
+    bottom: -5rem;
+    width: 3.6rem;
+    aspect-ratio: 1;
+    border-radius: 0.6rem;
+    background-color: var(--grey-very-light);
+    border: 0.2rem solid var(--white);
+    box-shadow: 0 0 18px #FFFFFFA0;
+    transition: left 0.5s linear, bottom 0.5s linear;
+
+    text-align: center;
+    font-size: 3.6rem;
+    color: var(--black);
+}
+.svg-dice {
+    display: flex;
+    flex: 1;
+    aspect-ratio: 1;
+}

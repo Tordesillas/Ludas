@@ -1,0 +1,74 @@
+.new-game-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: #00000070;
+}
+.overlay-outside-line {
+    display: flex;
+    flex: 6;
+    flex-direction: row;
+}
+.player-identity-space {
+    display: flex;
+    flex: 3;
+}
+.overlay-centered-area {
+    display: flex;
+    flex: 3;
+    justify-content: center;
+}
+.play-button {
+    height: 140%;
+    margin-top: -5%;
+    background-color: white;
+    aspect-ratio: 1;
+    border-radius: 100%;
+    cursor: pointer;
+    box-shadow: 3px 3px 8px #00000080;
+    transition: opacity 0.4s;
+
+    &:hover {
+        opacity: 0.9;
+    }
+    &:active {
+        opacity: 0.7;
+    }
+}
+
+.player-identity-wrapper {
+    position: relative;
+    display: flex;
+    flex: 6;
+}
+.player-identity {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    flex: 1;
+    margin: 2rem;
+    gap: 1rem;
+}
+.player-identity-button {
+    display: flex;
+    padding: 18%;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.9;
+    border-top-left-radius: 25%;
+    border-bottom-right-radius: 25%;
+    box-shadow: 3px 3px 8px #00000070;
+    transition: background-color 0.1s ease;
+}
+.new-player-name {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0.2rem;
+    text-align: center;
+    color: var(--white);
+    opacity: 0.9;
+}

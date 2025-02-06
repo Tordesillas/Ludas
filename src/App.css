@@ -1,0 +1,49 @@
+main {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    background-color: var(--background);
+}
+.main-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: min(95vw, 35rem);
+}
+.header-container {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    width: 100%;
+    height: 6rem;
+    justify-content: center;
+    align-items: center;
+}
+.header-buttons {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 1rem;
+    display: flex;
+    align-items: center;
+}
+.header-button {
+    height: 3rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: opacity 0.1s;
+
+    &:hover {
+        opacity: 0.8;
+    }
+    &:active {
+        opacity: 0.6;
+    }
+}
+h1 {
+    font-size: 2.6rem;
+    color: var(--white);
+    text-shadow: 1px 3px var(--default);
+}

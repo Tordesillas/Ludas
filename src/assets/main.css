@@ -1,0 +1,35 @@
+body, p, h1 {
+    margin: 0;
+}
+:root {
+    font-family: "WendyOne-Regular", sans-serif;
+    text-rendering: optimizeLegibility;
+
+    --black: #000000;
+    --grey: #BABABA;
+    --grey-very-light: #F0F0F0;
+    --white: #FFFFFF;
+    --background: #1A1A2A;
+    --default: #008E8E;
+    --orange-dark: #D67200;
+    --orange: #FF8800;
+    --orange-light: #FFA033;
+    --orange-very-light: #FFC27C;
+    --purple-dark: #6600d6;
+    --purple: #7900FF;
+    --purple-light: #9433FF;
+    --purple-very-light: #BB7DFF;
+    --green-dark: #38ba2f;
+    --green: #4FD046;
+    --green-light: #72D96B;
+    --green-very-light: #A1DA9D;
+    --blue-dark: #0073d6;
+    --blue: #0089FF;
+    --blue-light: #33A1FF;
+    --blue-very-light: #7FC3FF;
+}
+
+@font-face {
+    font-family: "WendyOne-Regular";
+    src: local("WendyOne-Regular"), url("./fonts/WendyOne-Regular.ttf") format("truetype");
+}

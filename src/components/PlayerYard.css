@@ -1,0 +1,35 @@
+.player-yard {
+    flex: 6;
+}
+.yard-area {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    flex: 1;
+    aspect-ratio: 1;
+    margin: 12.5%;
+}
+.yard-token-support {
+    flex: 1;
+    margin: 22%;
+    border-radius: 100%;
+}
+.yard-token-support-purple {
+    background: var(--purple-light);
+    box-shadow: inset 5px 5px 15px #7E2BD9,
+                inset -5px -5px 15px #AA3BFF;
+}
+.yard-token-support-green {
+    background: var(--green-light);
+    box-shadow: inset 5px 5px 15px #61B85B,
+                inset -5px -5px 15px #83FA7B;
+}
+.yard-token-support-orange {
+    background: var(--orange-light);
+    box-shadow: inset 5px 5px 15px #D9882B,
+                inset -5px -5px 15px #FFB83B;
+}
+.yard-token-support-blue {
+    background: var(--blue-light);
+    box-shadow: inset 5px 5px 15px #2B89D9,
+                inset -5px -5px 15px #3BB9FF;
+}

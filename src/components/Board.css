@@ -1,0 +1,9 @@
+.board {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    aspect-ratio: 1;
+    transition: filter 0.5s;
+    overflow: hidden;
+    border-radius: 2rem;
+}
