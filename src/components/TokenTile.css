@@ -22,24 +22,29 @@
 }
 .token-layer {
     position: absolute;
-    top: 0; right: 0; bottom: 0; left: 0;
+    inset: 0;
     border-radius: 50%;
     overflow: hidden;
+    --translation-space: 4px;
 
     &:nth-child(1) {
-        transform: translateZ(-4px);
+        transform: translateZ(calc(-1 * var(--translation-space)));
     }
     &:nth-child(2) {
-        transform: translateZ(4px);
+        transform: translateZ(var(--translation-space));
+    }
+
+    @media (max-width: 500px) {
+        --translation-space: 3px;
     }
 }
 .interactive-halo {
     position: absolute;
-    top: 0; right: 0; bottom: 0; left: 0;
+    inset: 0;
     animation: rotate 2.5s cubic-bezier(0.2, 0.5, 0.8, 0.5) infinite;
     content: "";
     border-radius: 50%;
-    padding: 10%;
+    padding: 12%;
     background: conic-gradient(transparent, white 90%, transparent 60%);
     mask: linear-gradient(#000, #000) exclude,
         linear-gradient(#000, #000) content-box;

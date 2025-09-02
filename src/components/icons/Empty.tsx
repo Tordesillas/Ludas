@@ -8,7 +8,7 @@ export default function Empty({color = "black"}: Props): React.ReactElement {
     return (
         <svg
             viewBox="0 0 142.916 142.916"
-            style={{display: "flex", flex: 1, aspectRatio: 1}}
+            style={{display: "flex", flex: 1, aspectRatio: 1, fill: color}}
         >
             <path
                 d="M32.901,114.799l-12.015,16.507c-2.375,3.265-1.656,7.835,1.608,10.21c1.301,0.945,2.807,1.4,4.295,1.4
@@ -19,7 +19,6 @@ export default function Empty({color = "black"}: Props): React.ReactElement {
                 c-6.407,0-12.461-1.477-17.905-4.039l48.729-66.951C109.331,51.864,113.682,61.964,113.682,73.08z M71.457,30.856
                 c6.901,0,13.403,1.698,19.159,4.646l-49.043,67.381c-7.623-7.643-12.344-18.181-12.344-29.801
                 C29.232,49.798,48.173,30.856,71.457,30.856z"
-                fill={color}
             />
         </svg>
     );

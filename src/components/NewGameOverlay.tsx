@@ -6,6 +6,8 @@ import {startGame} from "../store/gameSlice.ts";
 import type {Player} from "../models";
 import "./NewGameOverlay.css";
 
+type PlayerType = 'AI' | 'Human' | null;
+
 export default function NewGameOverlay(): React.ReactElement {
     const dispatch = useDispatch();
     const [newPlayers, setNewPlayers] = useState<Player[]>([
@@ -14,8 +16,9 @@ export default function NewGameOverlay(): React.ReactElement {
         {color: "green", type: 'AI'},
         {color: "blue", type: null}
     ]);
+    const playerTypes: PlayerType[] = ["Human", "AI", null];
 
-    function changePlayerIdentity(playerIndex: number, type: 'AI' | 'Human' | null) {
+    function changePlayerIdentity(playerIndex: number, type: PlayerType) {
         setNewPlayers([...newPlayers].map((player, index) => {
             if (playerIndex === index) {
                 return {...player, type: type};
@@ -26,89 +29,128 @@ export default function NewGameOverlay(): React.ReactElement {
     }
 
     function onPlayButtonPressed() {
-        dispatch(startGame(newPlayers));
-        nextMove();
+        setTimeout(() => {
+            dispatch(startGame(newPlayers));
+            nextMove();
+        }, 100);
     }
 
     return (
         <div className="new-game-overlay">
-            <div className="overlay-outside-line">
-                <PlayerIdentityOverlay
-                    player={newPlayers[1]}
-                    index={1}
-                    onChangePlayerIdentity={(type: 'AI' | 'Human' | null) => changePlayerIdentity(1, type)}
-                />
-                <div className="player-identity-space"/>
-                <PlayerIdentityOverlay
-                    player={newPlayers[2]}
-                    index={2}
-                    onChangePlayerIdentity={(type: 'AI' | 'Human' | null) => changePlayerIdentity(2, type)}
-                />
-            </div>
+            <div className="horizontal-new-players">
+                <div className="new-player-container">
+                    <div className="player-identity">
+                        {playerTypes.map((type) =>
+                            <PlayerIdentityButton
+                                key={`${type}-p2`}
+                                type={type}
+                                player={newPlayers[1]}
+                                onChangePlayerIdentity={(type: PlayerType) => changePlayerIdentity(1, type)}
+                            />
+                        )}
+                    </div>
 
-            <div className="overlay-centered-area">
-                <div className="play-button" onClick={onPlayButtonPressed}>
-                    <Play color="var(--default)" />
+                    <p className="new-player-name">Joueur 2</p>
+                </div>
+
+                <span className="horizontal-gap"/>
+
+                <div className="new-player-container">
+                    <div className="player-identity">
+                        {playerTypes.map((type) =>
+                            <PlayerIdentityButton
+                                key={`${type}-p3`}
+                                type={type}
+                                player={newPlayers[2]}
+                                onChangePlayerIdentity={(type: PlayerType) => changePlayerIdentity(2, type)}
+                            />
+                        )}
+                    </div>
+
+                    <p className="new-player-name">Joueur 3</p>
                 </div>
             </div>
 
-            <div className="overlay-outside-line">
-                <PlayerIdentityOverlay
-                    player={newPlayers[0]}
-                    index={0}
-                    onChangePlayerIdentity={(type: 'AI' | 'Human' | null) => changePlayerIdentity(0, type)}
-                />
-                <div className="player-identity-space"/>
-                <PlayerIdentityOverlay
-                    player={newPlayers[3]}
-                    index={3}
-                    onChangePlayerIdentity={(type: 'AI' | 'Human' | null) => changePlayerIdentity(3, type)}
-                />
+            <div className="centered-area">
+                <div className="play-button" onClick={onPlayButtonPressed}>
+                    <span className="play-button-edge" />
+                    <div className="play-button-front">
+                        <Play color="var(--default)" />
+                    </div>
+                </div>
+            </div>
+
+            <div className="horizontal-new-players">
+                <div className="new-player-container">
+                    <div className="player-identity">
+                        {playerTypes.map((type) =>
+                            <PlayerIdentityButton
+                                key={`${type}-p1`}
+                                type={type}
+                                player={newPlayers[0]}
+                                onChangePlayerIdentity={(type: PlayerType) => changePlayerIdentity(0, type)}
+                            />
+                        )}
+                    </div>
+
+                    <p className="new-player-name">Joueur 1</p>
+                </div>
+
+                <span className="horizontal-gap"/>
+
+                <div className="new-player-container">
+                    <div className="player-identity">
+                        {playerTypes.map((type) =>
+                            <PlayerIdentityButton
+                                key={`${type}-p4`}
+                                type={type}
+                                player={newPlayers[3]}
+                                onChangePlayerIdentity={(type: PlayerType) => changePlayerIdentity(3, type)}
+                            />
+                        )}
+                    </div>
+
+                    <p className="new-player-name">Joueur 4</p>
+                </div>
             </div>
         </div>
     );
 }
 
-interface PlayerIdentityOverlayProps {
+
+interface PlayerIdentityButtonProps {
+    type: PlayerType;
     player: Player;
-    index: number;
-    onChangePlayerIdentity: (type: 'AI' | 'Human' | null) => void;
+    onChangePlayerIdentity: (type: PlayerType) => void;
 }
 
-function PlayerIdentityOverlay({player, index, onChangePlayerIdentity}: PlayerIdentityOverlayProps): React.ReactElement {
-    const playerColor = `var(--${player.color})`;
+function PlayerIdentityButton({type, player, onChangePlayerIdentity}: PlayerIdentityButtonProps): React.ReactElement {
+    const isSelected = player.type === type;
 
-    const isHuman = player.type === 'Human';
-    const isAI = player.type === 'AI';
-    const isAnybody = player.type === null;
+    let icon;
+    switch (type) {
+        case 'Human':
+            icon = Human;
+            break;
+        case 'AI':
+            icon = AI;
+            break;
+        default:
+            icon = Empty;
+    }
+    const coloredIcon = React.createElement(icon, {
+        color: `var(--${isSelected ? player.color : "black"})`
+    });
 
     return (
-        <div className="player-identity-wrapper">
-            <div className="player-identity">
-                <div
-                    className="player-identity-button"
-                    style={{cursor: isHuman ? "auto" : "pointer", backgroundColor: isHuman ? 'var(--white)' : 'var(--grey)'}}
-                    onClick={() => onChangePlayerIdentity('Human')}
-                >
-                    <Human color={isHuman ? playerColor : undefined} />
-                </div>
-                <div
-                    className="player-identity-button"
-                    style={{cursor: isAI ? "auto" : "pointer", backgroundColor: isAI ? 'var(--white)' : 'var(--grey)'}}
-                    onClick={() => onChangePlayerIdentity('AI')}
-                >
-                    <AI color={isAI ? playerColor : undefined} />
-                </div>
-                <div
-                    className="player-identity-button"
-                    style={{cursor: isAnybody ? "auto" : "pointer", backgroundColor: isAnybody ? 'var(--white)' : 'var(--grey)'}}
-                    onClick={() => onChangePlayerIdentity(null)}
-                >
-                    <Empty color={isAnybody ? playerColor : undefined} />
-                </div>
+        <div
+            className={`identity-button ${isSelected && "identity-button-pressed"}`}
+            onClick={() => onChangePlayerIdentity(type)}
+        >
+            <span className="identity-button-edge" />
+            <div className="identity-button-front">
+                {coloredIcon}
             </div>
-
-            <p className="new-player-name">Joueur {index + 1}</p>
         </div>
     );
 }

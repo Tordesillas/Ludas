@@ -14,24 +14,26 @@ export default function Board(): React.ReactElement {
     const playerTurn = useSelector(selectPlayerTurn);
 
     return (
-        <div className="board" style={{filter: `drop-shadow(0 0 4rem var(--${playerTurn?.color ?? "default"}))`}}>
-            <BoardBackground />
+        <div className="board-shadow" style={{filter: `drop-shadow(0 0 3rem var(--${playerTurn?.color ?? "default"}))`}}>
+            <div className="board">
+                <BoardBackground />
 
-            {isNewGame && (
-                <NewGameOverlay />
-            )}
-            {isEndGame && (
-                <Leaderboard />
-            )}
+                {isNewGame && (
+                    <NewGameOverlay />
+                )}
+                {isEndGame && (
+                    <Leaderboard />
+                )}
 
-            {tokens.map((token, index) => (
-                <TokenTile
-                    key={index}
-                    token={token}
-                    index={index}
-                    floor={tokens.slice(0, index).filter(({tileId}) => tileId === token.tileId).length}
-                />
-            ))}
+                {tokens.map((token, index) => (
+                    <TokenTile
+                        key={index}
+                        token={token}
+                        index={index}
+                        floor={tokens.slice(0, index).filter(({tileId}) => tileId === token.tileId).length}
+                    />
+                ))}
+            </div>
         </div>
     );
 }

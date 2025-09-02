@@ -20,16 +20,16 @@ export default function Leaderboard(): React.ReactElement {
 
                 {leaderboard.map((player, index) => (
                     <div key={player.color} className="leaderboard-item">
-                        <p className="player-position">{index + 1}.</p>
-                        <p className="player-name" style={{color: `var(--${player.color})`}}>
+                        {index + 1}.
+                        <span className="player-name" style={{color: `var(--${player.color})`}}>
                             Joueur <span style={{textTransform: "capitalize"}}>{player.color}</span>
-                        </p>
-                        <p>{Math.floor(player.score * 100)}%</p>
+                        </span>
+                        {Math.floor(player.score * 100)}%
                     </div>
                 ))}
 
                 <div className="leaderboard-reset" onClick={() => resetGame()}>
-                    Relancer une partie
+                    Nouvelle partie
                 </div>
             </div>
         </div>

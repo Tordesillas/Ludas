@@ -1,7 +1,7 @@
 main {
     display: flex;
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
     justify-content: center;
     background-color: var(--background);
 }

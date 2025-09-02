@@ -11,7 +11,7 @@ export default function Reset({color = "white"}: Props): React.ReactElement {
             style={{display: "flex", flex: 1, aspectRatio: 1}}
         >
             <defs>
-                <filter id="shadow">
+                <filter id="shadow" x="-25%" y="-25%" width="150%" height="150%">
                     <feDropShadow dx="0" dy="0" stdDeviation="1" floodColor="white" />
                 </filter>
             </defs>

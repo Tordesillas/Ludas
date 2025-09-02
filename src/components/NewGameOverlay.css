@@ -1,46 +1,20 @@
 .new-game-overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     display: flex;
     flex-direction: column;
-    background-color: #00000070;
+    background-color: #00000080;
 }
-.overlay-outside-line {
+.horizontal-new-players {
     display: flex;
     flex: 6;
     flex-direction: row;
 }
-.player-identity-space {
+.horizontal-gap {
     display: flex;
     flex: 3;
 }
-.overlay-centered-area {
-    display: flex;
-    flex: 3;
-    justify-content: center;
-}
-.play-button {
-    height: 140%;
-    margin-top: -5%;
-    background-color: white;
-    aspect-ratio: 1;
-    border-radius: 100%;
-    cursor: pointer;
-    box-shadow: 3px 3px 8px #00000080;
-    transition: opacity 0.4s;
-
-    &:hover {
-        opacity: 0.9;
-    }
-    &:active {
-        opacity: 0.7;
-    }
-}
-
-.player-identity-wrapper {
+.new-player-container {
     position: relative;
     display: flex;
     flex: 6;
@@ -49,19 +23,8 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     flex: 1;
-    margin: 2rem;
-    gap: 1rem;
-}
-.player-identity-button {
-    display: flex;
-    padding: 18%;
-    justify-content: center;
-    align-items: center;
-    opacity: 0.9;
-    border-top-left-radius: 25%;
-    border-bottom-right-radius: 25%;
-    box-shadow: 3px 3px 8px #00000070;
-    transition: background-color 0.1s ease;
+    margin: 15%;
+    gap: 10%;
 }
 .new-player-name {
     position: absolute;
@@ -71,4 +34,106 @@
     text-align: center;
     color: var(--white);
     opacity: 0.9;
+}
+.centered-area {
+    display: flex;
+    flex: 3;
+    justify-content: center;
+}
+.play-button {
+    position: relative;
+    cursor: pointer;
+    margin: -5%;
+
+    &:hover .play-button-front {
+        filter: brightness(120%);
+        transform: translateY(-8px);
+        transition: transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
+    }
+    &:active .play-button-front {
+        transform: translateY(-2px);
+        transition: transform 34ms;
+    }
+}
+.play-button-edge {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: linear-gradient(
+            to left,
+            oklch(0.65 0 0) 0%,
+            oklch(0.8 0 0) 20%,
+            oklch(0.8 0 0) 80%,
+            oklch(0.65 0 0) 100%
+    );
+    box-shadow: 3px 3px 8px #00000050;
+}
+.play-button-front {
+    height: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-color: var(--white);
+    will-change: transform;
+    transform: translateY(-4px);
+    transition: transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1), filter 250ms;
+
+    & svg {
+        padding: 18%;
+    }
+}
+
+.identity-button {
+    position: relative;
+    border-top-left-radius: 25%;
+    border-bottom-right-radius: 25%;
+    cursor: pointer;
+
+    &:hover .identity-button-front {
+        filter: brightness(120%);
+        transform: translateY(-6px);
+        transition: transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
+    }
+    &:active .identity-button-front {
+        transform: translateY(-2px);
+        transition: transform 34ms;
+    }
+}
+.identity-button-pressed {
+    cursor: auto;
+
+    .identity-button-front,
+    &:hover .identity-button-front,
+    &:active .identity-button-front {
+        filter: brightness(100%);
+        transform: translateY(0);
+        transition: transform 34ms;
+    }
+}
+.identity-button-edge {
+    position: absolute;
+    inset: 0;
+    border-top-left-radius: 25%;
+    border-bottom-right-radius: 25%;
+    background: linear-gradient(
+            to left,
+            oklch(0.65 0 0) 0%,
+            oklch(0.8 0 0) 20%,
+            oklch(0.8 0 0) 100%
+    );
+    box-shadow: 3px 3px 8px #00000050;
+}
+.identity-button-front {
+    height: 100%;
+    aspect-ratio: 1;
+    border-top-left-radius: 25%;
+    border-bottom-right-radius: 25%;
+    background-color: var(--white);
+    will-change: transform;
+    transform: translateY(-4px);
+    transition: transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1), filter 250ms;
+
+    & svg {
+        padding: 15%;
+        transition: fill 0.3s ease;
+    }
 }

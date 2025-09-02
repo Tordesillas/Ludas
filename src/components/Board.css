@@ -1,9 +1,13 @@
+.board-shadow {
+    transition: filter 0.5s;
+}
 .board {
     position: relative;
     display: flex;
     flex-direction: column;
     aspect-ratio: 1;
-    transition: filter 0.5s;
     overflow: hidden;
     border-radius: 2rem;
+    background-color: var(--grey-dark);
+    gap: 1px;
 }

@@ -61,17 +61,15 @@ export default function RollTheDice(): React.ReactElement {
 
     return (
         <>
-            <div
-                className="roll-the-dice"
-                onClick={isRollTheDiceAvailable ? rollTheDice : undefined}
-                style={{
-                    backgroundColor: `var(--${playerTurn?.color ?? 'default'})`,
-                    cursor: isRollTheDiceAvailable ? "pointer" : "auto",
-                    opacity: isRollTheDiceAvailable ? 1 : 0.1
-                }}
-            >
-                <Dice size={50} />
-            </div>
+            {!!playerTurn && (
+                <div
+                    className={`roll-the-dice ${!isRollTheDiceAvailable && "disabled-roll"}`}
+                    onClick={isRollTheDiceAvailable ? rollTheDice : undefined}
+                    style={{backgroundColor: `var(--${playerTurn.color})`}}
+                >
+                    <Dice size={50} />
+                </div>
+            )}
 
             <div className="dice" id="dice">
                 <svg className="svg-dice" viewBox="0 0 50 50" fill="none">

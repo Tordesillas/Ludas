@@ -64,7 +64,11 @@ function evaluateTokenMove(token: Token, dice: number): number {
     if (token.tileId < 0) {
         return 100;
     } else if (token.tileId > 100) {
-        return 10 - dice;
+        if (isAnEndTile(tileAfterMove)) {
+            return (7 - dice) * 10;
+        } else {
+            return 10 - dice;
+        }
     }
 
     const canKill = store.getState().game.tokens
@@ -75,16 +79,22 @@ function evaluateTokenMove(token: Token, dice: number): number {
     const tileProgress = (token.tileId + (52 - getStartTileId(token.color))) % 52 + 1;
     const farAwayBonus = Math.floor(tileProgress / 2);
 
+    const hasBestProgress = !store.getState().game.tokens
+        .filter(({color}) => color === token.color)
+        .some(({tileId}) => tileId > token.tileId && tileId < 100);
+    const bestProgressBonus = hasBestProgress ? 20 : 0;
+
     const secureBonus = getTile(tileAfterMove).secure ? 30 : 0;
     const secureMalus = isSecuredTile(token.tileId) ? -20 : 0;
+    const homeColumnBonus = (tileAfterMove > 100) ? 30 : 0;
 
     const howManyTokensBehind = store.getState().game.tokens
         .filter(({color}) => color !== token.color)
         .filter(({tileId}) => (token.tileId - 6 + 52) % 52 <= tileId && tileId <= token.tileId)
         .length;
-    const dangerBonus = howManyTokensBehind * 2;
+    const dangerBonus = howManyTokensBehind * 3;
 
-    const bonus = canKillBonus + farAwayBonus + secureBonus + secureMalus + dangerBonus;
+    const bonus = canKillBonus + farAwayBonus + bestProgressBonus + secureBonus + secureMalus + homeColumnBonus + dangerBonus;
 
     return Math.max(bonus, 5);
 }

@@ -2,6 +2,7 @@
     display: flex;
     flex: 6;
     flex-direction: row;
+    gap: 1px;
 }
 .home-square {
     flex: 6;
@@ -11,31 +12,29 @@
     flex: 3;
     grid-template-columns: repeat(3, 1fr);
     flex-direction: column;
+    gap: 1px;
 }
 .centered-area {
     display: flex;
     flex: 3;
     flex-direction: row;
+    gap: 1px;
 }
 .centered-line {
     display: grid;
     flex: 6;
     grid-template-columns: repeat(6, 1fr);
-    flex-direction: row;
+    gap: 1px;
 }
 .finish-area {
     position: relative;
     display: grid;
     flex: 3;
     grid-template-columns: repeat(3, 1fr);
-    flex-direction: row;
 }
 .triangle {
     position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    inset: 0;
 }
 .green-triangle {
     clip-path: polygon(0 0, 100% 0, 50% 50%);
@@ -56,5 +55,4 @@
 .tile {
     flex: 1;
     aspect-ratio: 1;
-    border: 1px solid #808080;
 }

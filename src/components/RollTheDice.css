@@ -3,16 +3,33 @@
     position: fixed;
     left: auto;
     right: auto;
-    bottom: 0;
+    bottom: -8px;
     display: flex;
-    height: 4.5rem;
-    width: 7.5rem;
+    height: 80px;
+    width: 120px;
     justify-content: center;
     align-items: center;
+    opacity: 1;
+    cursor: pointer;
     border-top-right-radius: 2rem;
     border-top-left-radius: 2rem;
     box-shadow: 0 -3px 10px 0 #00000080;
-    transition: opacity 200ms ease;
+    transition: opacity 250ms ease, transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.8), filter 350ms;
+
+    &:hover {
+        transform: translateY(-6px);
+        transition: transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.8);
+        filter: brightness(110%);
+    }
+}
+.disabled-roll {
+    opacity: 0.1;
+    cursor: auto;
+
+    &:hover {
+        transform: translateY(0);
+        filter: brightness(100%);
+    }
 }
 .dice {
     z-index: 7;
@@ -20,19 +37,14 @@
     left: 30%;
     bottom: -5rem;
     width: 3.6rem;
-    aspect-ratio: 1;
+    height: 3.6rem;
     border-radius: 0.6rem;
     background-color: var(--grey-very-light);
     border: 0.2rem solid var(--white);
     box-shadow: 0 0 18px #FFFFFFA0;
     transition: left 0.5s linear, bottom 0.5s linear;
-
-    text-align: center;
-    font-size: 3.6rem;
-    color: var(--black);
 }
 .svg-dice {
-    display: flex;
-    flex: 1;
+    width: 100%;
     aspect-ratio: 1;
 }
