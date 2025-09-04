@@ -1,6 +1,16 @@
-body, p, h1 {
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+* {
     margin: 0;
+}
+body {
+    -webkit-font-smoothing: antialiased;
     user-select: none;
+}
+h1, p {
+    overflow-wrap: break-word;
+    text-wrap: pretty;
 }
 :root {
     font-family: "WendyOne-Regular", sans-serif;

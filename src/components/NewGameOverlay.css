@@ -8,7 +8,6 @@
 .horizontal-new-players {
     display: flex;
     flex: 6;
-    flex-direction: row;
 }
 .horizontal-gap {
     display: flex;
@@ -18,22 +17,26 @@
     position: relative;
     display: flex;
     flex: 6;
+    align-items: center;
 }
 .player-identity {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
     flex: 1;
-    margin: 15%;
     gap: 10%;
+    padding: 15%;
 }
 .new-player-name {
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 0.2rem;
+    bottom: 5px;
     text-align: center;
     color: var(--white);
-    opacity: 0.9;
+    opacity: 0.8;
+
+    @media (max-width: 500px) {
+        font-size: 0.8rem;
+    }
 }
 .centered-area {
     display: flex;
@@ -83,6 +86,8 @@
 }
 
 .identity-button {
+    display: flex;
+    flex: 1;
     position: relative;
     border-top-left-radius: 25%;
     border-bottom-right-radius: 25%;
@@ -99,14 +104,11 @@
     }
 }
 .identity-button-pressed {
-    cursor: auto;
-
     .identity-button-front,
     &:hover .identity-button-front,
     &:active .identity-button-front {
-        filter: brightness(100%);
-        transform: translateY(0);
-        transition: transform 34ms;
+        transform: translateY(-2px);
+        transition: filter 250ms;
     }
 }
 .identity-button-edge {
@@ -123,7 +125,8 @@
     box-shadow: 3px 3px 8px #00000050;
 }
 .identity-button-front {
-    height: 100%;
+    display: flex;
+    flex: 1;
     aspect-ratio: 1;
     border-top-left-radius: 25%;
     border-bottom-right-radius: 25%;

@@ -41,7 +41,7 @@ export default function TokenTile({token, index, floor}: Props): React.ReactElem
 
     return (
         <div
-            className={`token-tile ${token.isInteractive && "interactive-token-tile"}`}
+            className={`token-tile ${token.isInteractive ? "interactive-token-tile" : ""}`}
             id={`token${index}`}
             onClick={onClick}
         >

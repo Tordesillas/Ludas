@@ -63,7 +63,7 @@ export default function RollTheDice(): React.ReactElement {
         <>
             {!!playerTurn && (
                 <div
-                    className={`roll-the-dice ${!isRollTheDiceAvailable && "disabled-roll"}`}
+                    className={`roll-the-dice ${isRollTheDiceAvailable ? "" : "disabled-roll"}`}
                     onClick={isRollTheDiceAvailable ? rollTheDice : undefined}
                     style={{backgroundColor: `var(--${playerTurn.color})`}}
                 >

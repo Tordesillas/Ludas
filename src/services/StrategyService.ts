@@ -19,15 +19,17 @@ export function getPlayerProgress(color: string): number {
 
     const tilesTraveled = playerTokens
         .map(({tileId}) => tileId)
-        .reduce((acc, tileId) => {
-            if (tileId < 0) return acc;
-            if (tileId > 100) {
-                return acc + 53 + parseInt(`${tileId}`[2]);
-            }
-            return acc + ((tileId + (52 - getStartTileId(color))) % 52 + 1);
-        }, 0);
+        .reduce((acc, tileId) => acc + getTokenProgress(tileId, color), 0);
 
     return tilesTraveled / (59 * 4);
+}
+
+function getTokenProgress(tileId: number, color: string): number {
+    if (tileId < 0) return 0;
+    if (tileId > 100) {
+        return 53 + parseInt(`${tileId}`[2]);
+    }
+    return (tileId + (52 - getStartTileId(color))) % 52 + 1;
 }
 
 export function findBestTokenToMove(color: string, stepsToDo: number): Token | null {
@@ -81,7 +83,7 @@ function evaluateTokenMove(token: Token, dice: number): number {
 
     const hasBestProgress = !store.getState().game.tokens
         .filter(({color}) => color === token.color)
-        .some(({tileId}) => tileId > token.tileId && tileId < 100);
+        .some(({tileId, color}) => getTokenProgress(tileId, color) > getTokenProgress(token.tileId, color) && tileId < 100);
     const bestProgressBonus = hasBestProgress ? 20 : 0;
 
     const secureBonus = getTile(tileAfterMove).secure ? 30 : 0;
