@@ -1,6 +1,6 @@
-import {findBestTokenToMove, getDiceResult, getMovableTokens, getPlayerProgress} from "./StrategyService.ts";
-import {getYardTiles, isAnEndTile, isSecuredTile, tileIn1Step} from "./TileService.ts";
-import {store} from "../store/store.ts";
+import { findBestTokenToMove, getDiceResult, getMovableTokens, getPlayerProgress } from './StrategyService.ts';
+import { getYardTiles, isAnEndTile, isSecuredTile, tileIn1Step } from './TileService.ts';
+import { store } from '../store/store.ts';
 import {
     cleanInteractiveTokens,
     endGame,
@@ -9,18 +9,18 @@ import {
     setIfPlayerPlaysAgain,
     setInteractiveTokens,
     setNextPlayerTurn
-} from "../store/gameSlice.ts";
+} from '../store/gameSlice.ts';
 import {
     changeRollTheDiceAvailability,
     cleanDice,
     resetDiceStore,
     saveDiceRoll,
     setDiceVisibility
-} from "../store/diceSlice.ts";
-import type {Token} from "../models";
+} from '../store/diceSlice.ts';
+import type { Token } from '../models';
 
 export function nextMove() {
-    const {playerTurn} = store.getState().game;
+    const { playerTurn } = store.getState().game;
 
     if (!playerTurn) return;
 
@@ -42,7 +42,12 @@ export function rollTheDice() {
     setTimeout(() => {
         // Skip if it's the third 6
         if (dice === 6) {
-            if (store.getState().dice.playerDices.slice(-3).reduce((acc, e) => acc + e, 0) === 18) {
+            if (
+                store
+                    .getState()
+                    .dice.playerDices.slice(-3)
+                    .reduce((acc, e) => acc + e, 0) === 18
+            ) {
                 prepareNextMove();
                 return;
             } else {
@@ -82,7 +87,7 @@ export function rollTheDice() {
 export function moveToken(token: Token) {
     store.dispatch(cleanInteractiveTokens());
 
-    const {playerDices} = store.getState().dice;
+    const { playerDices } = store.getState().dice;
     let dice = playerDices[playerDices.length - 1];
 
     // Takes the token out of its yard
@@ -100,21 +105,27 @@ export function moveToken(token: Token) {
     }
     waitTimes = 0;
     while (waitTimes < dice) {
-        const tokenMove = {color: token.color, prevTile: tilesToPass[waitTimes], nextTile: tilesToPass[waitTimes + 1]};
-        setTimeout(() => store.dispatch(moveTokenToTile(tokenMove)),
-            waitTimes * TIME_FOR_TILE_ANIMATION);
+        const tokenMove = {
+            color: token.color,
+            prevTile: tilesToPass[waitTimes],
+            nextTile: tilesToPass[waitTimes + 1]
+        };
+        setTimeout(() => store.dispatch(moveTokenToTile(tokenMove)), waitTimes * TIME_FOR_TILE_ANIMATION);
         waitTimes++;
     }
 
     // Initiates a possible kill
     if (!isSecuredTile(tilesToPass[tilesToPass.length - 1])) {
-        const tokensToKill = store.getState().game.tokens
-            .filter(({color}) => color !== token.color)
-            .filter(({tileId}) => tileId === tilesToPass[tilesToPass.length - 1]);
+        const tokensToKill = store
+            .getState()
+            .game.tokens.filter(({ color }) => color !== token.color)
+            .filter(({ tileId }) => tileId === tilesToPass[tilesToPass.length - 1]);
         if (tokensToKill.length) {
             store.dispatch(setIfPlayerPlaysAgain(true));
-            setTimeout(() => tokensToKill.forEach((token) => sendTokenHome(token)),
-                waitTimes * TIME_FOR_TILE_ANIMATION);
+            setTimeout(
+                () => tokensToKill.forEach((token) => sendTokenHome(token)),
+                waitTimes * TIME_FOR_TILE_ANIMATION
+            );
             waitTimes++;
         }
     }
@@ -129,16 +140,16 @@ export function moveToken(token: Token) {
 
 function sendTokenHome(token: Token) {
     const yardTiles = getYardTiles(token.color);
-    const occupiedTiles = store.getState().game.tokens.map(({tileId}) => tileId);
-    const unoccupiedTile = yardTiles.find(({id}) => !occupiedTiles.includes(id))!;
+    const occupiedTiles = store.getState().game.tokens.map(({ tileId }) => tileId);
+    const unoccupiedTile = yardTiles.find(({ id }) => !occupiedTiles.includes(id))!;
 
-    store.dispatch(moveTokenToTile({color: token.color, prevTile: token.tileId, nextTile: unoccupiedTile.id}));
+    store.dispatch(moveTokenToTile({ color: token.color, prevTile: token.tileId, nextTile: unoccupiedTile.id }));
 }
 
 function prepareNextMove() {
     store.dispatch(setDiceVisibility(false));
 
-    const playerColors = store.getState().game.players.map(({color}) => color);
+    const playerColors = store.getState().game.players.map(({ color }) => color);
     if (playerColors.some((color) => getPlayerProgress(color) === 1)) {
         store.dispatch(cleanDice());
         store.dispatch(endGame());
@@ -156,10 +167,10 @@ function prepareNextMove() {
     }
 
     setTimeout(() => {
-        const {players, playerTurn} = store.getState().game;
+        const { players, playerTurn } = store.getState().game;
         const playingPlayers = players.filter((player) => !!player.type);
         const nextPlayer = [...playingPlayers, ...playingPlayers][
-            playingPlayers.findIndex(({color}) => color === playerTurn!.color) + 1
+            playingPlayers.findIndex(({ color }) => color === playerTurn!.color) + 1
         ];
         store.dispatch(setNextPlayerTurn(nextPlayer));
 

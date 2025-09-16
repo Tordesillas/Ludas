@@ -1,30 +1,32 @@
-import React, {useState} from "react";
-import {useDispatch} from "react-redux";
-import {AI, Human, Play} from "./icons";
-import {nextMove} from "../services/SequencerService.ts";
-import {startGame} from "../store/gameSlice.ts";
-import type {Player} from "../models";
-import "./NewGameOverlay.css";
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { AI, Human, Play } from './icons';
+import { nextMove } from '../services/SequencerService.ts';
+import { startGame } from '../store/gameSlice.ts';
+import type { Player } from '../models';
+import './NewGameOverlay.css';
 
 type PlayerType = 'AI' | 'Human' | null;
 
 export default function NewGameOverlay(): React.ReactElement {
     const dispatch = useDispatch();
     const [newPlayers, setNewPlayers] = useState<Player[]>([
-        {color: "orange", type: 'Human'},
-        {color: "purple", type: null},
-        {color: "green", type: 'AI'},
-        {color: "blue", type: null}
+        { color: 'orange', type: 'Human' },
+        { color: 'purple', type: null },
+        { color: 'green', type: 'AI' },
+        { color: 'blue', type: null }
     ]);
 
     function changePlayerIdentity(playerIndex: number, type: PlayerType) {
-        setNewPlayers([...newPlayers].map((player, index) => {
-            if (playerIndex === index) {
-                return {...player, type: type};
-            } else {
-                return player;
-            }
-        }));
+        setNewPlayers(
+            [...newPlayers].map((player, index) => {
+                if (playerIndex === index) {
+                    return { ...player, type: type };
+                } else {
+                    return player;
+                }
+            })
+        );
     }
 
     function onPlayButtonPressed() {
@@ -80,36 +82,39 @@ export default function NewGameOverlay(): React.ReactElement {
     );
 }
 
-
 interface PlayerIdentitySelectorProps {
     player: Player;
     playerPos: number;
     onChangePlayerIdentity: (type: PlayerType) => void;
 }
 
-function PlayerIdentitySelector({player, playerPos, onChangePlayerIdentity}: PlayerIdentitySelectorProps): React.ReactElement {
-    const isHuman = player.type === "Human";
-    const isAI = player.type === "AI";
+function PlayerIdentitySelector({
+    player,
+    playerPos,
+    onChangePlayerIdentity
+}: PlayerIdentitySelectorProps): React.ReactElement {
+    const isHuman = player.type === 'Human';
+    const isAI = player.type === 'AI';
 
     return (
         <div className="new-player-container">
             <div className="player-identity">
                 <div
-                    className={`identity-button ${isHuman ? "identity-button-pressed": ""}`}
-                    onClick={() => onChangePlayerIdentity(isHuman ? null : "Human")}
+                    className={`identity-button ${isHuman ? 'identity-button-pressed' : ''}`}
+                    onClick={() => onChangePlayerIdentity(isHuman ? null : 'Human')}
                 >
                     <span className="identity-button-edge" />
                     <div className="identity-button-front">
-                        <Human color={isHuman ? player.color : "var(--black)"} />
+                        <Human color={isHuman ? player.color : 'var(--black)'} />
                     </div>
                 </div>
                 <div
-                    className={`identity-button ${isAI ? "identity-button-pressed": ""}`}
-                    onClick={() => onChangePlayerIdentity(isAI ? null : "AI")}
+                    className={`identity-button ${isAI ? 'identity-button-pressed' : ''}`}
+                    onClick={() => onChangePlayerIdentity(isAI ? null : 'AI')}
                 >
                     <span className="identity-button-edge" />
                     <div className="identity-button-front">
-                        <AI color={isAI ? player.color : "var(--black)"} />
+                        <AI color={isAI ? player.color : 'var(--black)'} />
                     </div>
                 </div>
             </div>

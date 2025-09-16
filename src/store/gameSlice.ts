@@ -1,6 +1,6 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import type {Player, Token} from "../models";
-import {getYardTiles} from "../services/TileService.ts";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import type { Player, Token } from '../models';
+import { getYardTiles } from '../services/TileService.ts';
 
 interface GameState {
     isNewGame: boolean;
@@ -38,8 +38,7 @@ export const gameSlice = createSlice({
                 .filter((player) => !!player.type)
                 .forEach((player) =>
                     playersTokens.push(
-                        ...getYardTiles(player.color)
-                            .map((tile) => ({color: player.color, tileId: tile.id}))
+                        ...getYardTiles(player.color).map((tile) => ({ color: player.color, tileId: tile.id }))
                     )
                 );
             state.tokens = playersTokens;
@@ -51,20 +50,26 @@ export const gameSlice = createSlice({
             state.isEndGame = true;
         },
         setInteractiveTokens(state: GameState, action: PayloadAction<Token[]>) {
-            state.tokens = state.tokens
-                .map((token) => ({
-                    ...token,
-                    isInteractive: action.payload.some(({tileId, color}) => tileId === token.tileId && color === token.color)
-                }));
+            state.tokens = state.tokens.map((token) => ({
+                ...token,
+                isInteractive: action.payload.some(
+                    ({ tileId, color }) => tileId === token.tileId && color === token.color
+                )
+            }));
         },
         cleanInteractiveTokens(state: GameState) {
-            state.tokens = state.tokens
-                .map((token) => ({...token, isInteractive: false}));
+            state.tokens = state.tokens.map((token) => ({ ...token, isInteractive: false }));
         },
-        moveTokenToTile(state: GameState, action: PayloadAction<{color: string, prevTile: number, nextTile: number}>) {
-            const tokenToMoveId = state.tokens.findIndex(({tileId, color}) => action.payload.prevTile === tileId && action.payload.color === color);
-            state.tokens = state.tokens
-                .map((token, id) => id !== tokenToMoveId ? token : {...token, tileId: action.payload.nextTile});
+        moveTokenToTile(
+            state: GameState,
+            action: PayloadAction<{ color: string; prevTile: number; nextTile: number }>
+        ) {
+            const tokenToMoveId = state.tokens.findIndex(
+                ({ tileId, color }) => action.payload.prevTile === tileId && action.payload.color === color
+            );
+            state.tokens = state.tokens.map((token, id) =>
+                id !== tokenToMoveId ? token : { ...token, tileId: action.payload.nextTile }
+            );
         },
         setNextPlayerTurn(state: GameState, action: PayloadAction<Player>) {
             state.playerTurn = action.payload;
@@ -74,14 +79,23 @@ export const gameSlice = createSlice({
         }
     },
     selectors: {
-        selectIsNewGame: state => state.isNewGame,
-        selectIsEndGame: state => state.isEndGame,
-        selectPlayers: state => state.players,
-        selectTokens: state => state.tokens,
-        selectPlayerTurn: state => state.playerTurn
+        selectIsNewGame: (state) => state.isNewGame,
+        selectIsEndGame: (state) => state.isEndGame,
+        selectPlayers: (state) => state.players,
+        selectTokens: (state) => state.tokens,
+        selectPlayerTurn: (state) => state.playerTurn
     }
 });
 
-export const {resetGameStore, startGame, endGame, setInteractiveTokens, cleanInteractiveTokens, moveTokenToTile, setNextPlayerTurn, setIfPlayerPlaysAgain} = gameSlice.actions;
-export const {selectIsNewGame, selectIsEndGame, selectPlayers, selectTokens, selectPlayerTurn} = gameSlice.selectors;
+export const {
+    resetGameStore,
+    startGame,
+    endGame,
+    setInteractiveTokens,
+    cleanInteractiveTokens,
+    moveTokenToTile,
+    setNextPlayerTurn,
+    setIfPlayerPlaysAgain
+} = gameSlice.actions;
+export const { selectIsNewGame, selectIsEndGame, selectPlayers, selectTokens, selectPlayerTurn } = gameSlice.selectors;
 export default gameSlice.reducer;

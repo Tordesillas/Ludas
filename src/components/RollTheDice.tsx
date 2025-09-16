@@ -1,10 +1,10 @@
-import React, {useEffect, useRef, useState} from "react";
-import {useSelector} from "react-redux";
-import {Dice} from "./icons";
-import {rollTheDice} from "../services/SequencerService.ts";
-import {selectDice, selectDiceVisibility, selectIsRollTheDiceAvailable} from "../store/diceSlice.ts";
-import {selectPlayerTurn} from "../store/gameSlice.ts";
-import "./RollTheDice.css";
+import React, { useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { Dice } from './icons';
+import { rollTheDice } from '../services/SequencerService.ts';
+import { selectDice, selectDiceVisibility, selectIsRollTheDiceAvailable } from '../store/diceSlice.ts';
+import { selectPlayerTurn } from '../store/gameSlice.ts';
+import './RollTheDice.css';
 
 export default function RollTheDice(): React.ReactElement {
     const isRollTheDiceAvailable = useSelector(selectIsRollTheDiceAvailable);
@@ -13,7 +13,7 @@ export default function RollTheDice(): React.ReactElement {
     const isDiceVisible = useSelector(selectDiceVisibility);
 
     const [diceDisplayed, setDiceDisplayed] = useState<number>(1);
-    const diceAnimationID = useRef<number | null>(null);
+    const diceAnimationID = useRef<ReturnType<typeof setTimeout>>(null);
 
     function showDice() {
         const diceDiv = document.getElementById('dice')!;
@@ -63,9 +63,9 @@ export default function RollTheDice(): React.ReactElement {
         <>
             {!!playerTurn && (
                 <div
-                    className={`roll-the-dice ${isRollTheDiceAvailable ? "" : "disabled-roll"}`}
+                    className={`roll-the-dice ${isRollTheDiceAvailable ? '' : 'disabled-roll'}`}
                     onClick={isRollTheDiceAvailable ? rollTheDice : undefined}
-                    style={{backgroundColor: `var(--${playerTurn.color})`}}
+                    style={{ backgroundColor: `var(--${playerTurn.color})` }}
                 >
                     <Dice size={50} />
                 </div>
@@ -74,27 +74,23 @@ export default function RollTheDice(): React.ReactElement {
             <div className="dice" id="dice">
                 <svg className="svg-dice" viewBox="0 0 50 50" fill="none">
                     <g fill="#000000">
-                        {(diceDisplayed === 2 || diceDisplayed === 3 || diceDisplayed === 4 || diceDisplayed === 5 || diceDisplayed === 6) && (
-                            <circle cx="10" cy="10" r="6" />
-                        )}
+                        {(diceDisplayed === 2 ||
+                            diceDisplayed === 3 ||
+                            diceDisplayed === 4 ||
+                            diceDisplayed === 5 ||
+                            diceDisplayed === 6) && <circle cx="10" cy="10" r="6" />}
                         {(diceDisplayed === 4 || diceDisplayed === 5 || diceDisplayed === 6) && (
                             <circle cx="40" cy="10" r="6" />
                         )}
-                        {(diceDisplayed === 6) && (
-                            <circle cx="10" cy="25" r="6" />
-                        )}
+                        {diceDisplayed === 6 && <circle cx="10" cy="25" r="6" />}
                         {(diceDisplayed === 1 || diceDisplayed === 3 || diceDisplayed === 5) && (
                             <circle cx="25" cy="25" r="6" />
                         )}
-                        {(diceDisplayed === 6) && (
-                            <circle cx="40" cy="25" r="6" />
-                        )}
+                        {diceDisplayed === 6 && <circle cx="40" cy="25" r="6" />}
                         {(diceDisplayed === 4 || diceDisplayed === 5 || diceDisplayed === 6) && (
                             <circle cx="10" cy="40" r="6" />
                         )}
-                        {(diceDisplayed > 1) && (
-                            <circle cx="40" cy="40" r="6" />
-                        )}
+                        {diceDisplayed > 1 && <circle cx="40" cy="40" r="6" />}
                     </g>
                 </svg>
             </div>

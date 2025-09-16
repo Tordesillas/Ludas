@@ -1,8 +1,8 @@
-import React, {useEffect, useRef} from "react";
-import {moveToken} from "../services/SequencerService.ts";
-import {getTile} from "../services/TileService.ts";
-import type {Token} from "../models";
-import "./TokenTile.css";
+import React, { useEffect, useRef } from 'react';
+import { moveToken } from '../services/SequencerService.ts';
+import { getTile } from '../services/TileService.ts';
+import type { Token } from '../models';
+import './TokenTile.css';
 
 interface Props {
     token: Token;
@@ -10,7 +10,7 @@ interface Props {
     floor: number;
 }
 
-export default function TokenTile({token, index, floor}: Props): React.ReactElement {
+export default function TokenTile({ token, index, floor }: Props): React.ReactElement {
     const prevTileId = useRef<number>(0);
     useEffect(() => {
         if (token.tileId !== prevTileId.current) {
@@ -41,16 +41,14 @@ export default function TokenTile({token, index, floor}: Props): React.ReactElem
 
     return (
         <div
-            className={`token-tile ${token.isInteractive ? "interactive-token-tile" : ""}`}
+            className={`token-tile ${token.isInteractive ? 'interactive-token-tile' : ''}`}
             id={`token${index}`}
             onClick={onClick}
         >
             <div className="token">
-                <div className="token-layer" style={{backgroundColor: `var(--${token.color}-dark)`}} />
-                <div className="token-layer" style={{backgroundColor: `var(--${token.color})`}}>
-                    {token.isInteractive && (
-                        <div className="interactive-halo" />
-                    )}
+                <div className="token-layer" style={{ backgroundColor: `var(--${token.color}-dark)` }} />
+                <div className="token-layer" style={{ backgroundColor: `var(--${token.color})` }}>
+                    {token.isInteractive && <div className="interactive-halo" />}
                 </div>
             </div>
         </div>

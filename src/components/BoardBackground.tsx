@@ -1,9 +1,15 @@
-import React from "react";
-import {PlayerYard} from "./PlayerYard.tsx";
-import {Shield} from "./icons";
-import {BOTTOM_ARM_TILES, END_TILES, LEFT_ARM_TILES, RIGHT_ARM_TILES, TOP_ARM_TILES} from "../services/TileService.ts";
-import type {Tile} from "../models";
-import "./BoardBackground.css";
+import React from 'react';
+import { PlayerYard } from './PlayerYard.tsx';
+import { Shield } from './icons';
+import {
+    BOTTOM_ARM_TILES,
+    END_TILES,
+    LEFT_ARM_TILES,
+    RIGHT_ARM_TILES,
+    TOP_ARM_TILES
+} from '../services/TileService.ts';
+import type { Tile } from '../models';
+import './BoardBackground.css';
 
 export default function BoardBackground(): React.ReactElement {
     return (
@@ -57,7 +63,7 @@ interface TileAreaProps {
     tile: Tile;
 }
 
-function TileArea({tile}: TileAreaProps): React.ReactElement {
+function TileArea({ tile }: TileAreaProps): React.ReactElement {
     let backgroundColor = 'var(--white)';
     if (tile?.secure && tile?.isStart) {
         backgroundColor = `var(--${tile.color}-very-light)`;
@@ -66,12 +72,8 @@ function TileArea({tile}: TileAreaProps): React.ReactElement {
     }
 
     return (
-        <div
-            id={`tile${tile.id}`}
-            className="tile"
-            style={{backgroundColor}}
-        >
-            {tile?.secure && (<Shield />)}
+        <div id={`tile${tile.id}`} className="tile" style={{ backgroundColor }}>
+            {tile?.secure && <Shield />}
         </div>
     );
 }

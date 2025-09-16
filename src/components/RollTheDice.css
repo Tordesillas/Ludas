@@ -14,7 +14,10 @@
     border-top-right-radius: 2rem;
     border-top-left-radius: 2rem;
     box-shadow: 0 -3px 10px 0 #00000080;
-    transition: opacity 250ms ease, transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.8), filter 350ms;
+    transition:
+        opacity 250ms ease,
+        transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.8),
+        filter 350ms;
 
     &:hover {
         transform: translateY(-6px);
@@ -42,7 +45,9 @@
     background-color: var(--grey-very-light);
     border: 0.2rem solid var(--white);
     box-shadow: 0 0 18px #FFFFFFA0;
-    transition: left 0.5s linear, bottom 0.5s linear;
+    transition:
+        left 0.5s linear,
+        bottom 0.5s linear;
 }
 .svg-dice {
     width: 100%;

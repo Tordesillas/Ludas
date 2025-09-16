@@ -1,4 +1,4 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface DiceState {
     playerDices: number[];
@@ -33,12 +33,13 @@ export const diceSlice = createSlice({
         }
     },
     selectors: {
-        selectDice: state => state.playerDices[state.playerDices.length - 1],
-        selectDiceVisibility: state => state.isDiceVisible,
-        selectIsRollTheDiceAvailable: state => state.isRollTheDiceAvailable
+        selectDice: (state) => state.playerDices[state.playerDices.length - 1],
+        selectDiceVisibility: (state) => state.isDiceVisible,
+        selectIsRollTheDiceAvailable: (state) => state.isRollTheDiceAvailable
     }
 });
 
-export const {resetDiceStore, saveDiceRoll, cleanDice, setDiceVisibility, changeRollTheDiceAvailability} = diceSlice.actions;
-export const {selectDice, selectDiceVisibility, selectIsRollTheDiceAvailable} = diceSlice.selectors;
+export const { resetDiceStore, saveDiceRoll, cleanDice, setDiceVisibility, changeRollTheDiceAvailability } =
+    diceSlice.actions;
+export const { selectDice, selectDiceVisibility, selectIsRollTheDiceAvailable } = diceSlice.selectors;
 export default diceSlice.reducer;
