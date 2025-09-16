@@ -76,7 +76,7 @@ function evaluateTokenMove(token: Token, dice: number): number {
     const canKill = store.getState().game.tokens
         .filter(({color}) => color !== token.color)
         .some(({tileId}) => tileId === tileAfterMove);
-    const canKillBonus = canKill ? 80 : 0;
+    const canKillBonus = canKill ? 100 : 0;
 
     const tileProgress = (token.tileId + (52 - getStartTileId(token.color))) % 52 + 1;
     const farAwayBonus = Math.floor(tileProgress / 2);

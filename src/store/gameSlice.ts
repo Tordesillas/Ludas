@@ -62,7 +62,7 @@ export const gameSlice = createSlice({
                 .map((token) => ({...token, isInteractive: false}));
         },
         moveTokenToTile(state: GameState, action: PayloadAction<{color: string, prevTile: number, nextTile: number}>) {
-            const tokenToMoveId = state.tokens.findIndex(({tileId, color}) => action.payload.prevTile === tileId && action.payload.color === color)!;
+            const tokenToMoveId = state.tokens.findIndex(({tileId, color}) => action.payload.prevTile === tileId && action.payload.color === color);
             state.tokens = state.tokens
                 .map((token, id) => id !== tokenToMoveId ? token : {...token, tileId: action.payload.nextTile});
         },
