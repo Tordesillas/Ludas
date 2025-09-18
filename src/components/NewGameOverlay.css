@@ -109,8 +109,10 @@
     .identity-button-front,
     &:hover .identity-button-front,
     &:active .identity-button-front {
-        transform: translateY(-2px);
-        transition: filter 250ms;
+        transform: translateY(-2px) !important;
+        transition:
+            transform 34ms,
+            filter 250ms !important;
     }
 }
 .identity-button {
