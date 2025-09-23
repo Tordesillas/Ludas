@@ -4,6 +4,7 @@ import reactPlugin from 'eslint-plugin-react';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
 import prettierPlugin from 'eslint-plugin-prettier';
 import prettierConfig from 'eslint-config-prettier/flat';
+import storybook from 'eslint-plugin-storybook';
 
 const config = [
     {
@@ -13,6 +14,7 @@ const config = [
     ...typescriptESLint.configs.recommended,
     ...typescriptESLint.configs.recommendedTypeChecked,
     prettierConfig,
+    ...storybook.configs['flat/recommended'],
     {
         files: ['**/*.ts', '**/*.tsx'],
         languageOptions: {
