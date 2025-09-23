@@ -16,24 +16,24 @@
 .yard-token-support-purple {
     background: var(--purple-light);
     box-shadow:
-        inset 5px 5px 15px #7E2BD9,
-        inset -5px -5px 15px #AA3BFF;
+        inset 5px 5px 15px hsl(276 70% 50%),
+        inset -5px -5px 15px hsl(281 100% 60%);
 }
 .yard-token-support-green {
     background: var(--green-light);
     box-shadow:
-        inset 5px 5px 15px #61B85B,
-        inset -5px -5px 15px #83FA7B;
+        inset 5px 5px 15px hsl(116 41% 55%),
+        inset -5px -5px 15px hsl(111 70% 70%);
 }
 .yard-token-support-orange {
     background: var(--orange-light);
     box-shadow:
-        inset 5px 5px 15px #D9882B,
-        inset -5px -5px 15px #FFB83B;
+        inset 5px 5px 15px hsl(32 70% 50%),
+        inset -5px -5px 15px hsl(38 100% 60%);
 }
 .yard-token-support-blue {
     background: var(--blue-light);
     box-shadow:
-        inset 5px 5px 15px #2B89D9,
-        inset -5px -5px 15px #3BB9FF;
+        inset 5px 5px 15px hsl(212 70% 50%),
+        inset -5px -5px 15px hsl(205 100% 60%);
 }

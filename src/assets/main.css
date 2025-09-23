@@ -26,22 +26,22 @@ p {
     --white: #FFFFFF;
     --background: #1A1A2A;
     --default: #008E8E;
-    --orange-dark: #D67200;
-    --orange: #FF8800;
-    --orange-light: #FFA033;
-    --orange-very-light: #FFC27C;
-    --purple-dark: #6600D6;
-    --purple: #7900FF;
-    --purple-light: #9433FF;
-    --purple-very-light: #BB7DFF;
-    --green-dark: #38BA2F;
-    --green: #4FD046;
-    --green-light: #72D96B;
-    --green-very-light: #A1DA9D;
-    --blue-dark: #0073D6;
-    --blue: #0089FF;
-    --blue-light: #33A1FF;
-    --blue-very-light: #7FC3FF;
+    --orange-dark: hsl(32 100% 42%);
+    --orange: hsl(32 100% 50%);
+    --orange-light: hsl(32 100% 60%);
+    --orange-very-light: hsl(32 100% 75%);
+    --purple-dark: hsl(276 100% 42%);
+    --purple: hsl(276 100% 50%);
+    --purple-light: hsl(276 100% 60%);
+    --purple-very-light: hsl(276 100% 75%);
+    --green-dark: hsl(116 60% 42%);
+    --green: hsl(116 60% 50%);
+    --green-light: hsl(116 60% 60%);
+    --green-very-light: hsl(116 60% 75%);
+    --blue-dark: hsl(212 100% 42%);
+    --blue: hsl(212 100% 50%);
+    --blue-light: hsl(212 100% 60%);
+    --blue-very-light: hsl(212 100% 75%);
 }
 
 @font-face {

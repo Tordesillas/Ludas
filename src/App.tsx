@@ -14,7 +14,7 @@ export default function App(): React.ReactElement {
         <main>
             <div className="main-container">
                 <div className="header-container">
-                    <h1>Ludas</h1>
+                    <h1 translate="no">Ludas</h1>
 
                     <div className="header-buttons">
                         {!isNewGame && (
