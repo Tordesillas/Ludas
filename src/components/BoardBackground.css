@@ -1,36 +1,7 @@
-.outside-line {
-    display: flex;
-    flex: 6;
-    flex-direction: row;
-    gap: 1px;
-}
-.home-square {
-    flex: 6;
-}
-.centered-column {
-    display: grid;
-    flex: 3;
-    grid-template-columns: repeat(3, 1fr);
-    flex-direction: column;
-    gap: 1px;
-}
-.centered-area {
-    display: flex;
-    flex: 3;
-    flex-direction: row;
-    gap: 1px;
-}
-.centered-line {
-    display: grid;
-    flex: 6;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 1px;
-}
-.finish-area {
+.end-area {
     position: relative;
-    display: grid;
-    flex: 3;
-    grid-template-columns: repeat(3, 1fr);
+    grid-row: 7 / 10;
+    grid-column: 7 / 10;
 }
 .triangle {
     position: absolute;
@@ -51,8 +22,4 @@
 .orange-triangle {
     clip-path: polygon(50% 50%, 100% 100%, 0 100%);
     background: var(--orange-light);
-}
-.tile {
-    flex: 1;
-    aspect-ratio: 1;
 }

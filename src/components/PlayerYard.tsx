@@ -3,16 +3,24 @@ import './PlayerYard.css';
 
 interface Props {
     color: string;
+    row: number;
+    column: number;
 }
 
-export function PlayerYard({ color }: Props): React.ReactElement {
+export function PlayerYard({ color, row, column }: Props): React.ReactElement {
+    const style = {
+        backgroundColor: `var(--${color}-light)`,
+        gridRowStart: row,
+        gridRowEnd: row + 6,
+        gridColumnStart: column,
+        gridColumnEnd: column + 6
+    };
+
     return (
-        <div className="player-yard" style={{ backgroundColor: `var(--${color}-light)` }}>
-            <div className="yard-area">
-                {[1, 2, 3, 4].map((n) => (
-                    <div className={`yard-token-support yard-token-support-${color}`} key={n} />
-                ))}
-            </div>
+        <div className="yard" style={style}>
+            {[1, 2, 3, 4].map((n) => (
+                <span className={`yard-token-support yard-token-support-${color}`} key={n} />
+            ))}
         </div>
     );
 }

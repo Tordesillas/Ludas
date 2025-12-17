@@ -4,7 +4,7 @@ export function getTile(tileId: number): Tile {
     if (tileId < 0) {
         return YARD_TILES.find(({ id }) => id === tileId)!;
     } else {
-        return BOARD_TILES.find(({ id }) => id === tileId)!;
+        return TILES.find(({ id }) => id === tileId)!;
     }
 }
 
@@ -72,7 +72,7 @@ export function isTileOutOfBound(tileId: number): boolean {
 }
 
 export function getStartTileId(color: string): number {
-    return BOARD_TILES.find((tile) => tile.isStart && tile.color === color)!.id;
+    return TILES.find((tile) => tile.isStart && tile.color === color)!.id;
 }
 
 export function isSecuredTile(tileId: number): boolean {
@@ -80,10 +80,10 @@ export function isSecuredTile(tileId: number): boolean {
 }
 
 export function isAnEndTile(tileId: number): boolean {
-    return END_TILES.map(({ id }) => id).includes(tileId);
+    return [106, 206, 306, 406].includes(tileId);
 }
 
-export const TOP_ARM_TILES: Tile[] = [
+export const TILES: Tile[] = [
     { id: 25, x: 6, y: 14 },
     { id: 26, x: 7, y: 14 },
     { id: 27, x: 8, y: 14 },
@@ -101,9 +101,7 @@ export const TOP_ARM_TILES: Tile[] = [
     { id: 31, x: 8, y: 10 },
     { id: 20, x: 6, y: 9 },
     { id: 305, x: 7, y: 9, color: 'green' },
-    { id: 32, x: 8, y: 9 }
-];
-export const BOTTOM_ARM_TILES: Tile[] = [
+    { id: 32, x: 8, y: 9 },
     { id: 6, x: 6, y: 5 },
     { id: 105, x: 7, y: 5, color: 'orange' },
     { id: 46, x: 8, y: 5 },
@@ -121,9 +119,7 @@ export const BOTTOM_ARM_TILES: Tile[] = [
     { id: 50, x: 8, y: 1 },
     { id: 1, x: 6, y: 0 },
     { id: 52, x: 7, y: 0 },
-    { id: 51, x: 8, y: 0 }
-];
-export const LEFT_ARM_TILES: Tile[] = [
+    { id: 51, x: 8, y: 0 },
     { id: 14, x: 0, y: 8 },
     { id: 15, x: 1, y: 8, color: 'purple', isStart: true, secure: true },
     { id: 16, x: 2, y: 8 },
@@ -141,9 +137,7 @@ export const LEFT_ARM_TILES: Tile[] = [
     { id: 10, x: 2, y: 6, secure: true },
     { id: 9, x: 3, y: 6 },
     { id: 8, x: 4, y: 6 },
-    { id: 7, x: 5, y: 6 }
-];
-export const RIGHT_ARM_TILES: Tile[] = [
+    { id: 7, x: 5, y: 6 },
     { id: 33, x: 9, y: 8 },
     { id: 34, x: 10, y: 8 },
     { id: 35, x: 11, y: 8 },
@@ -161,9 +155,7 @@ export const RIGHT_ARM_TILES: Tile[] = [
     { id: 43, x: 11, y: 6 },
     { id: 42, x: 12, y: 6 },
     { id: 41, x: 13, y: 6, color: 'blue', isStart: true, secure: true },
-    { id: 40, x: 14, y: 6 }
-];
-export const END_TILES: Tile[] = [
+    { id: 40, x: 14, y: 6 },
     { id: 1001, x: 6, y: 8 },
     { id: 306, x: 7, y: 8 },
     { id: 1002, x: 8, y: 8 },
@@ -173,13 +165,6 @@ export const END_TILES: Tile[] = [
     { id: 1004, x: 6, y: 6 },
     { id: 106, x: 7, y: 6 },
     { id: 1005, x: 8, y: 6 }
-];
-const BOARD_TILES: Tile[] = [
-    ...TOP_ARM_TILES,
-    ...BOTTOM_ARM_TILES,
-    ...LEFT_ARM_TILES,
-    ...RIGHT_ARM_TILES,
-    ...END_TILES
 ].sort((t1, t2) => t1.id - t2.id);
 
 const ORANGE_YARD_TILES: Tile[] = [

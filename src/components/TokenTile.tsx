@@ -17,8 +17,8 @@ export default function TokenTile({ token, index, floor }: Props): React.ReactEl
             const boardTile = getTile(token.tileId);
             const tokenDiv = document.getElementById(`token${index}`)!;
 
-            tokenDiv.style.left = `calc(min(calc(95vw / 15), calc(35rem / 15)) * ${boardTile.x})`;
-            tokenDiv.style.bottom = `calc(min(calc(95vw / 15), calc(35rem / 15)) * ${boardTile.y})`;
+            tokenDiv.style.left = `calc(min(95vw, 35rem) / 15 * ${boardTile.x})`;
+            tokenDiv.style.bottom = `calc(min(95vw, 35rem) / 15 * ${boardTile.y})`;
         }
         prevTileId.current = token.tileId;
     }, [token]);
@@ -46,10 +46,10 @@ export default function TokenTile({ token, index, floor }: Props): React.ReactEl
             onClick={onClick}
         >
             <div className="token">
-                <div className="token-layer" style={{ backgroundColor: `var(--${token.color}-dark)` }} />
-                <div className="token-layer" style={{ backgroundColor: `var(--${token.color})` }}>
-                    {token.isInteractive && <div className="interactive-halo" />}
-                </div>
+                <span className="token-layer" style={{ backgroundColor: `var(--${token.color}-dark)` }} />
+                <span className="token-layer" style={{ backgroundColor: `var(--${token.color})` }}>
+                    {token.isInteractive && <span className="interactive-halo" />}
+                </span>
             </div>
         </div>
     );

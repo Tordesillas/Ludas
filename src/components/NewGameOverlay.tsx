@@ -38,21 +38,15 @@ export default function NewGameOverlay(): React.ReactElement {
 
     return (
         <div className="new-game-overlay">
-            <div className="horizontal-new-players">
+            {Array.from({ length: 4 }).map((_, i) => (
                 <PlayerIdentitySelector
-                    player={newPlayers[1]}
-                    playerPos={1}
-                    onChangePlayerIdentity={(type: PlayerType) => changePlayerIdentity(1, type)}
+                    row={i === 1 || i === 2 ? 1 : 3}
+                    column={i === 0 || i === 1 ? 1 : 3}
+                    player={newPlayers[i]}
+                    playerPos={i}
+                    onChangePlayerIdentity={(type: PlayerType) => changePlayerIdentity(i, type)}
                 />
-
-                <span className="horizontal-gap" />
-
-                <PlayerIdentitySelector
-                    player={newPlayers[2]}
-                    playerPos={2}
-                    onChangePlayerIdentity={(type: PlayerType) => changePlayerIdentity(2, type)}
-                />
-            </div>
+            ))}
 
             <div className="centered-area">
                 <div className="play-button" onClick={onPlayButtonPressed}>
@@ -62,33 +56,21 @@ export default function NewGameOverlay(): React.ReactElement {
                     </div>
                 </div>
             </div>
-
-            <div className="horizontal-new-players">
-                <PlayerIdentitySelector
-                    player={newPlayers[0]}
-                    playerPos={0}
-                    onChangePlayerIdentity={(type: PlayerType) => changePlayerIdentity(0, type)}
-                />
-
-                <span className="horizontal-gap" />
-
-                <PlayerIdentitySelector
-                    player={newPlayers[3]}
-                    playerPos={3}
-                    onChangePlayerIdentity={(type: PlayerType) => changePlayerIdentity(3, type)}
-                />
-            </div>
         </div>
     );
 }
 
 interface PlayerIdentitySelectorProps {
+    row: number;
+    column: number;
     player: Player;
     playerPos: number;
     onChangePlayerIdentity: (type: PlayerType) => void;
 }
 
 function PlayerIdentitySelector({
+    row,
+    column,
     player,
     playerPos,
     onChangePlayerIdentity
@@ -97,7 +79,7 @@ function PlayerIdentitySelector({
     const isAI = player.type === 'AI';
 
     return (
-        <div className="new-player-container">
+        <div className="new-player-container" style={{ gridRow: row, gridColumn: column }}>
             <div className="player-identity">
                 <div
                     className={`identity-button ${isHuman ? 'identity-button-pressed' : ''}`}
