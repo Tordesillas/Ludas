@@ -6,7 +6,7 @@
 
 Try the game directly online: [Ludas - Play now](https://tordesillas.github.io/Ludas/).
 
-![Ludas Game Screenshot](res/screenshot.png)
+<img src="res/screenshot.png" alt="Ludas Game Screenshot" style="display: block; width: 50%; margin: auto;" />
 
 ### Features
 
